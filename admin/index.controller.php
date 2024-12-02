@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once($_SERVER['DOCUMENT_ROOT'] . '/DENTALCLINICAPPOINTMENT/includes/db.php');
 
 date_default_timezone_set('Asia/Manila');

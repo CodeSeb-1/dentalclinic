@@ -1,8 +1,10 @@
 <?php
 session_start();
 include_once($_SERVER['DOCUMENT_ROOT'] . '/DENTALCLINICAPPOINTMENT/includes/db.php');
-
-$name = $_SESSION['fullname']; // Fetch the full name from the session
+if(empty($_SESSION['patientid']) || $_SESSION['role'] === 'admin') {
+    header("Location: login.php");
+}
+$name = $_SESSION['email']; // Fetch the full name from the session
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +44,7 @@ $name = $_SESSION['fullname']; // Fetch the full name from the session
                             date_default_timezone_set('Asia/Manila');
                             
                             // Fetch upcoming appointments for today and beyond for the specific user
-                            $query = "SELECT date, time, status, treatment FROM bookappointment WHERE name = ? ORDER BY date ASC";
+                            $query = "SELECT * FROM bookappointment WHERE email = ? ORDER BY bapp_id DESC";
                             $stmt = $con->prepare($query);
                             $stmt->bind_param("s", $name); // Bind the name parameter to avoid SQL injection
                             $stmt->execute();
@@ -87,7 +89,7 @@ $name = $_SESSION['fullname']; // Fetch the full name from the session
                 <tbody>
                     <?php
                     // Fetch historical appointments
-                    $queryHistory = "SELECT name, date, time, status FROM bookappointment WHERE name = ? ORDER BY date DESC";
+                    $queryHistory = "SELECT name, date, time, status FROM bookappointment WHERE email = ? ORDER BY bapp_id DESC";
                     $stmtHistory = $con->prepare($queryHistory);
                     $stmtHistory->bind_param("s", $name);
                     $stmtHistory->execute();
@@ -136,7 +138,6 @@ $name = $_SESSION['fullname']; // Fetch the full name from the session
 </main>
 
 
-<script src="../javascript/calendar-form.js"></script>
 <script src="../javascript/notification.js"></script>
 
 </body>

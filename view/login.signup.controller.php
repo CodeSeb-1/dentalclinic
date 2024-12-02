@@ -27,6 +27,7 @@ if (isset($_POST['login'])) {
 
         // Direct password comparison (not secure, consider using password hashing)
         if ($password === $user['password']) {
+
             $_SESSION['email'] = $email;
             $_SESSION['fullname'] = $user['fullname'];
             $_SESSION['contactno'] = $user['contactno'];

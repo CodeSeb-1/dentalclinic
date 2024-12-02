@@ -13,26 +13,27 @@
         <div class="login-form-container">
             <img src="../image/image.png" class="logo" alt="logo">
             <div class="login-header">
-                <h1>Welcome to Our Dental Clinic</h1>
-                <p>Please log in to your account</p>
+                <h1>Create a New Password</h1>
+                <p>Your new password must not be the same as your previous one.</p>
             </div>
-            <form class="login-form" action="login.signup.controller.php" method="POST">
+            <form class="login-form" action="forgot.password.controller.php" method="POST">
                 <div class="form-group">
                     <input type="email" id="email" name="email" required placeholder=" " />
                     <label for="email">Email</label>
                 </div>
                 <div class="form-group">
-                    <input type="password" id="password" name="password" required placeholder=" " />
-                    <label for="password">Password</label>
+                    <input type="password" id="password" name="current_password" required placeholder=" " />
+                    <label for="password">Current Password</label>
                 </div>
-                <div class="remember-forgot">
-                    <div class="remember-me">
-                        <input type="checkbox" id="remember" name="remember">
-                        <label for="remember">Remember me</label>
-                    </div>
-                    <a href="forgot.password.php" class="forgot-password">Forgot password?</a>
+                <div class="form-group">
+                    <input type="password" id="password" name="new_password" required placeholder=" " />
+                    <label for="password">New Password</label>
                 </div>
-                <button type="submit" name="login" class="login-button">Login</button>
+                <div class="form-group">
+                    <input type="password" id="password" name="confirm_password" required placeholder=" " />
+                    <label for="password">Confirm Password</label>
+                </div>
+                <button type="submit" name="forgotPassword" class="login-button">Confirm</button>
                 <div class="register-link">
                     Don't have an account? <a href="signup.php">Register here</a>
                 </div>

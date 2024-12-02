@@ -1,5 +1,9 @@
 <?php
 include_once('index.controller.php');
+if(isset($_POST['logout'])) {
+    session_destroy();
+    echo"<script>window.location.href='../view/login.php';</script>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -196,12 +200,6 @@ include_once('index.controller.php');
             <form method="POST">
                 <button type="submit" name="logout" class="action-button">Logout</button>
             </form>
-            <?php
-                if(isset($_POST['logout'])) {
-                    session_destroy();
-                    echo"<script>window.location.href='../view/login.php';</script>";
-                }
-            ?>
         </header>
 
         <section class="content-section">

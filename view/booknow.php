@@ -1,5 +1,8 @@
 <?php 
 session_start();
+if(empty($_SESSION['patientid']) || $_SESSION['role'] === 'admin') {
+    header("Location: login.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,10 +41,10 @@ session_start();
                             include_once($_SERVER['DOCUMENT_ROOT'] . '/DENTALCLINICAPPOINTMENT/includes/db.php');
                             
                             date_default_timezone_set('Asia/Manila');
-                            $name = $_SESSION['fullname']; // Get the logged-in user's name
+                            $name = $_SESSION['email']; // Get the logged-in user's name
                             
                             // Fetch upcoming appointments for today and beyond for the specific user
-                            $query = "SELECT*FROM bookappointment WHERE name = ? ORDER BY date ASC";
+                            $query = "SELECT*FROM bookappointment WHERE email = ? ORDER BY bapp_id DESC";
                             $stmt = $con->prepare($query);
                             $stmt->bind_param("s", $name); // Bind the name parameter to avoid SQL injection
                             $stmt->execute();
